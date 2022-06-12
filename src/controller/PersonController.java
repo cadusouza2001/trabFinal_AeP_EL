@@ -22,7 +22,7 @@ public class PersonController {
         if (person.getHeight() < 0 || person.getWeight() < 0 || person.getAge() < 0) {
             return false;
         }
-        people.put(String.format("%05d",code++),person);
+        people.put(String.format("%03d",code++),person);
         return true;
     }
 

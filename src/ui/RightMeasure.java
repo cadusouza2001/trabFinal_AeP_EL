@@ -1,10 +1,12 @@
 package ui;
 
 import controller.PersonController;
+import utils.Calculator;
 import utils.Person;
 import utils.Sex;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class RightMeasure {
@@ -12,12 +14,12 @@ public class RightMeasure {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         PersonController peopleController = new PersonController();
+        Person personChosen;
 
-        peopleController.insertPerson(new Person("Carlos",Sex.MALE,21,68,1.7));
-        peopleController.insertPerson(new Person("Tom Holland",Sex.MALE,26,64,1.73));
-        peopleController.insertPerson(new Person("Tobey Maguire",Sex.MALE,47,71,1.73));
-        peopleController.insertPerson(new Person("Andrew Garfield",Sex.MALE,39,74,1.8));
-
+        peopleController.insertPerson(new Person("Carlos", Sex.MALE, 21, 68, 1.7));
+        peopleController.insertPerson(new Person("Tom Holland", Sex.MALE, 26, 64, 1.73));
+        peopleController.insertPerson(new Person("Tobey Maguire", Sex.MALE, 47, 71, 1.73));
+        peopleController.insertPerson(new Person("Andrew Garfield", Sex.MALE, 39, 74, 1.8));
 
 
         int choice = 0;
@@ -42,17 +44,39 @@ public class RightMeasure {
                     peopleController.insertPerson(registerPerson());
                     break;
                 case 2:
-                    System.out.println("De qual pessoa você quer calcular o IMC?");
+                    System.out.println("De qual pessoa você quer calcular o IMC? Escolha pelo código");
                     listPeople(peopleController);
+                    personChosen = peopleController.getPeople().get(readNumber());
+                    if (Objects.isNull(personChosen)) {
+                        System.out.println("Não encontramos ninguém com esse código");
+                    } else {
+                        System.out.printf("Nome: %s%nIMC: %.2f%n", personChosen.getName(), Calculator.calculateBMI(personChosen));
+                    }
                     break;
                 case 3:
-                    System.out.println("Até mais!");
+                    System.out.println("De qual pessoa você quer calcular o Peso Ideal? Escolha pelo código");
+                    listPeople(peopleController);
+                    personChosen = peopleController.getPeople().get(readNumber());
+                    if (Objects.isNull(personChosen)) {
+                        System.out.println("Não encontramos ninguém com esse código");
+                    } else {
+                        System.out.printf("Nome: %s%nPeso Ideal: %.2f%n", personChosen.getName(), Calculator.calculateIBW(personChosen));
+                    }
                     break;
                 case 4:
-                    System.out.println("Até mais!");
+                    System.out.println("De qual pessoa você quer calcular a Taxa de Gordura Corporal? Escolha pelo código");
+                    listPeople(peopleController);
+                    personChosen = peopleController.getPeople().get(readNumber());
+                    if (Objects.isNull(personChosen)) {
+                        System.out.println("Não encontramos ninguém com esse código");
+                    } else {
+                        System.out.printf("Nome: %s%nTaxa de Gordura Corporal: %.2f%n", personChosen.getName(), Calculator.calculateBFP(personChosen));
+                    }
                     break;
                 case 5:
-                    System.out.println("Até mais!");
+                    for (Map.Entry<String, Person> entry : peopleController.getPeople().entrySet()) {
+                        System.out.println(entry.getValue().toString());
+                    }
                     break;
                 case 6:
                     System.out.println("Até mais!");
@@ -133,7 +157,7 @@ public class RightMeasure {
 
     public static void listPeople(PersonController peopleController) {
         for (Map.Entry<String, Person> entry : peopleController.getPeople().entrySet()) {
-            System.out.printf("%s - %s\n", entry.getKey(), entry.getValue().getName());
+            System.out.printf("%s - %s%n", entry.getKey(), entry.getValue().getName());
         }
     }
 

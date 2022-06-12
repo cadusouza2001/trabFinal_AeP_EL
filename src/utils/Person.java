@@ -82,6 +82,6 @@ public class Person {
                 "\nBody Mass Index: " + Calculator.calculateBMI(this) +
                 "\nWeight status: " + weightStatus() +
                 "\nBody Fat Percentage: " + Calculator.calculateBFP(this) +
-                "\nIdeal Body Weight: " + Calculator.calculateIBW(this);
+                "\nIdeal Body Weight: " + Calculator.calculateIBW(this) + "\n";
     }
 }
