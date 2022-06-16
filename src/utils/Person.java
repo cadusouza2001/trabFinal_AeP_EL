@@ -15,6 +15,9 @@ public class Person {
         this.height = height;
     }
 
+    public Person() {
+    }
+
     public String getName() {
         return name;
     }
@@ -72,8 +75,7 @@ public class Person {
         }
     }
 
-    @Override
-    public String toString() {
+    public String infoString() {
         return "Name: " + name +
                 "\nSex: " + sex +
                 "\nAge: " + age +
@@ -83,5 +85,14 @@ public class Person {
                 "\nWeight status: " + weightStatus() +
                 "\nBody Fat Percentage: " + Calculator.calculateBFP(this) +
                 "\nIdeal Body Weight: " + Calculator.calculateIBW(this) + "\n";
+    }
+
+    @Override
+    public String toString() {
+        return "Name:" + name +
+                ";Sex:" + sex +
+                ";Age:" + age +
+                ";Weight:" + weight +
+                ";Height:" + height + "\n";
     }
 }
