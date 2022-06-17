@@ -11,12 +11,18 @@ import java.util.Map;
 public class PersonController {
     int code;
 
-    HashMap<String,Person> people;
+    HashMap<String, Person> people;
     FileRepository repo;
 
     public PersonController() throws IOException {
         this.people = new HashMap<>();
         this.repo = new FileRepository();
+        this.loadPeople();
+    }
+
+    public PersonController(String filePath) throws IOException {
+        this.people = new HashMap<>();
+        this.repo = new FileRepository(filePath);
         this.loadPeople();
     }
 
@@ -29,11 +35,11 @@ public class PersonController {
             return;
         }
 
-        people.put(String.format("%03d",++code),person);
-        this.repo.saveToRepo(String.format("Code:%03d",code) + ";" + person);
+        people.put(String.format("%03d", ++code), person);
+        this.repo.saveToRepo(String.format("Code:%03d", code) + ";" + person);
     }
 
-    public Person getPersonByCode(String code){
+    public Person getPersonByCode(String code) {
         return this.people.get(code);
     }
 
@@ -81,5 +87,14 @@ public class PersonController {
 
         this.people.put(personCode, person);
         this.code = Integer.parseInt(personCode);
+    }
+
+    public void closeRepo() throws IOException {
+        repo.getRepoWriter().close();
+        repo.getRepoReader().close();
+    }
+
+    public FileRepository getRepo() {
+        return repo;
     }
 }
