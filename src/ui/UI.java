@@ -60,7 +60,7 @@ public class UI {
                     break;
                 case 3:
                     message = (selectPersonByCode("De qual pessoa você quer calcular o Peso Ideal? Escolha pelo código")) ?
-                            String.format("Nome: %s%nPeso Ideal: %.2fkg%n", personChosen.getName(), Calculator.calculateIBW(personChosen)) :
+                            String.format("Nome: %s%nPeso Ideal: %.2f kg%n", personChosen.getName(), Calculator.calculateIBW(personChosen)) :
                             NO_PERSON_FOUND_MSG;
                     this.printLine(message);
                     break;
@@ -173,7 +173,7 @@ public class UI {
                 this.printLine("Por gentileza, responda com M ou F");
             }
         }
-        return aux.equalsIgnoreCase("M") ? Sex.MALE : Sex.FEMALE;
+        return aux.equalsIgnoreCase("M") ? Sex.MASCULINO : Sex.FEMININO;
     }
 
     public boolean selectPersonByCode(String code) {
@@ -183,13 +183,16 @@ public class UI {
     }
 
     public void listPeople(boolean codeOnly) {
+        boolean listEmpty=true;
         for (Map.Entry<String, Person> entry : this.peopleController.getPeople().entrySet()) {
+            listEmpty=false;
             if (codeOnly) {
                 this.printLine(String.format("%s - %s", entry.getKey(), entry.getValue().getName()));
             } else {
                 this.printLine(entry.getValue().infoString());
             }
         }
+        if (listEmpty) this.printLine("Não há ninguém na lista");
     }
 
     public void closeFile(){

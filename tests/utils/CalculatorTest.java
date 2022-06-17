@@ -2,13 +2,10 @@ package utils;
 
 import org.junit.Assert;
 import org.junit.Test;
-import utils.Calculator;
-import utils.Person;
-import utils.Sex;
 
 public class CalculatorTest {
-    Person malePerson = new Person("Homelander", Sex.MALE, 46, 75, 1.8);
-    Person femalePerson = new Person("Maeve", Sex.FEMALE, 36, 58, 1.72);
+    Person malePerson = new Person("Homelander", Sex.MASCULINO, 46, 75, 1.8);
+    Person femalePerson = new Person("Maeve", Sex.FEMININO, 36, 58, 1.72);
 
     /**
      * Method: calculateBMI(Person person)

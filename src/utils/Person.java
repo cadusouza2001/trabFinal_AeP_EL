@@ -60,31 +60,31 @@ public class Person {
 
     public String weightStatus() {
         double bmi = Calculator.calculateBMI(this);
-        if (sex == Sex.FEMALE) {
+        if (sex == Sex.FEMININO) {
             if (bmi < 19.1) {
-                return "Underweight";
+                return "Abaixo do peso";
             } else if (bmi <= 25.8) {
                 return "Ideal";
-            } else return "Obese";
+            } else return "Obeso";
         } else {
             if (bmi < 20.7) {
-                return "Underweight";
+                return "Abaixo do peso";
             } else if (bmi <= 26.4) {
                 return "Ideal";
-            } else return "Obese";
+            } else return "Obeso";
         }
     }
 
     public String infoString() {
-        return "Name: " + name +
-                "\nSex: " + sex +
-                "\nAge: " + age +
-                "\nWeight: " + weight + "kg" +
-                "\nHeight: " + height + "m" +
-                "\nBody Mass Index: " + String.format("%.2f", Calculator.calculateBMI(this))  +
-                "\nWeight status: " + weightStatus() +
-                "\nBody Fat Percentage: " + String.format("%.2f", Calculator.calculateBFP(this)) +
-                "\nIdeal Body Weight: " + String.format("%.2f", Calculator.calculateIBW(this)) + "\n";
+        return "Nome: " + name +
+                "\nSexo: " + sex +
+                "\nIdade: " + age +
+                "\nPeso: " + weight + " kg" +
+                "\nAltura: " + height + " m" +
+                "\nÍndice de Massa Corporal: " + String.format("%.2f", Calculator.calculateBMI(this))  +
+                "\nCondição: " + weightStatus() +
+                "\nTaxa de gordura corporal: " + String.format("%.2f%%", Calculator.calculateBFP(this)) +
+                "\nPeso ideal: " + String.format("%.2f kg", Calculator.calculateIBW(this)) + "\n";
     }
 
     @Override

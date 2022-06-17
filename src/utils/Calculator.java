@@ -12,12 +12,12 @@ public final class Calculator {
     }
 
     public static double calculateBFP(Person person) {
-        return (1.2*calculateBMI(person))-(10.8*(person.getSex()==Sex.FEMALE? 0 : 1))+(0.23*person.getAge())-5.4;
+        return (1.2*calculateBMI(person))-(10.8*(person.getSex()==Sex.FEMININO ? 0 : 1))+(0.23*person.getAge())-5.4;
     }
 
     public static double calculateIBW(Person person) {
         double height = person.getHeight()*100;
-        return (height-100)-((height-150)/(person.getSex()==Sex.MALE? 4 : 2));
+        return (height-100)-((height-150)/(person.getSex()==Sex.MASCULINO ? 4 : 2));
     }
 
 }
