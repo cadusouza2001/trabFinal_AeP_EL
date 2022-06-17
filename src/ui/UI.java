@@ -176,9 +176,9 @@ public class UI {
         return aux.equalsIgnoreCase("M") ? Sex.MALE : Sex.FEMALE;
     }
 
-    public boolean selectPersonByCode(String message) {
+    public boolean selectPersonByCode(String code) {
         listPeople(true);
-        personChosen = peopleController.getPersonByCode(this.getStringValue(message));
+        personChosen = peopleController.getPersonByCode(this.getStringValue(code));
         return !Objects.isNull(personChosen);
     }
 
