@@ -81,10 +81,10 @@ public class Person {
                 "\nAge: " + age +
                 "\nWeight: " + weight + "kg" +
                 "\nHeight: " + height + "m" +
-                "\nBody Mass Index: " + Calculator.calculateBMI(this) +
+                "\nBody Mass Index: " + String.format("%.2f", Calculator.calculateBMI(this))  +
                 "\nWeight status: " + weightStatus() +
-                "\nBody Fat Percentage: " + Calculator.calculateBFP(this) +
-                "\nIdeal Body Weight: " + Calculator.calculateIBW(this) + "\n";
+                "\nBody Fat Percentage: " + String.format("%.2f", Calculator.calculateBFP(this)) +
+                "\nIdeal Body Weight: " + String.format("%.2f", Calculator.calculateIBW(this)) + "\n";
     }
 
     @Override

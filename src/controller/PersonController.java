@@ -11,7 +11,7 @@ import java.util.Map;
 public class PersonController {
     int code;
 
-    HashMap<String,Person> people;
+    HashMap<String, Person> people;
     FileRepository repo;
 
     public PersonController() throws IOException {
@@ -20,20 +20,26 @@ public class PersonController {
         this.loadPeople();
     }
 
+    public PersonController(String filePath) throws IOException {
+        this.people = new HashMap<>();
+        this.repo = new FileRepository(filePath);
+        this.loadPeople();
+    }
+
     public Map<String, Person> getPeople() {
         return people;
     }
 
-    public boolean insertPerson(Person person) throws IOException {
+    public void insertPerson(Person person) throws IOException {
         if (person.getHeight() < 0 || person.getWeight() < 0 || person.getAge() < 0) {
-            return false;
+            return;
         }
-        people.put(String.format("%03d",code++),person);
-        this.repo.saveToRepo(String.format("Code:%03d",code++) + ";" + person);
-        return true;
+
+        people.put(String.format("%03d", ++code), person);
+        this.repo.saveToRepo(String.format("Code:%03d", code) + ";" + person);
     }
 
-    public Person getPersonByCode(String code){
+    public Person getPersonByCode(String code) {
         return this.people.get(code);
     }
 
@@ -51,13 +57,13 @@ public class PersonController {
     private void convertLineToPerson(String line) {
         String[] attributes = line.split(";");
         Person person = new Person();
-        String code = "";
+        String personCode = "";
 
-        for (int i = 0; i < attributes.length; i++) {
-            String[] attribute = attributes[i].split(":");
+        for (String s : attributes) {
+            String[] attribute = s.split(":");
             switch (attribute[0].toLowerCase()) {
                 case "code":
-                    code = attribute[1];
+                    personCode = attribute[1];
                     break;
                 case "name":
                     person.setName(attribute[1]);
@@ -74,10 +80,21 @@ public class PersonController {
                 case "height":
                     person.setHeight(Double.parseDouble(attribute[1]));
                     break;
+                default:
+                    //Não faz ação nenhuma pois a estrutura está errada no arquivo
             }
         }
 
-        this.people.put(code, person);
-        this.code = Integer.parseInt(code);
+        this.people.put(personCode, person);
+        this.code = Integer.parseInt(personCode);
+    }
+
+    public void closeRepo() throws IOException {
+        repo.getRepoWriter().close();
+        repo.getRepoReader().close();
+    }
+
+    public FileRepository getRepo() {
+        return repo;
     }
 }
