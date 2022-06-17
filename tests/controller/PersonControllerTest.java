@@ -10,7 +10,7 @@ import utils.Sex;
 public class PersonControllerTest {
 
     PersonController people;
-    Person person = new Person("Homelander", Sex.MALE, 46, 75, 1.8);
+    Person person = new Person("Homelander", Sex.MASCULINO, 46, 75, 1.8);
 
     @Before
     public void before() throws Exception {

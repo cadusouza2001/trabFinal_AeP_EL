@@ -69,7 +69,7 @@ public class PersonController {
                     person.setName(attribute[1]);
                     break;
                 case "sex":
-                    person.setSex(attribute[1].compareToIgnoreCase("male") == 0 ? Sex.MALE : Sex.FEMALE);
+                    person.setSex(attribute[1].compareToIgnoreCase("masculino") == 0 ? Sex.MASCULINO : Sex.FEMININO);
                     break;
                 case "age":
                     person.setAge(Integer.parseInt(attribute[1]));
