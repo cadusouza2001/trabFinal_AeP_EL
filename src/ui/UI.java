@@ -60,13 +60,13 @@ public class UI {
                     break;
                 case 3:
                     message = (selectPersonByCode("De qual pessoa você quer calcular o Peso Ideal? Escolha pelo código")) ?
-                            String.format("Nome: %s%nPeso Ideal: %.2f%n", personChosen.getName(), Calculator.calculateIBW(personChosen)) :
+                            String.format("Nome: %s%nPeso Ideal: %.2fkg%n", personChosen.getName(), Calculator.calculateIBW(personChosen)) :
                             NO_PERSON_FOUND_MSG;
                     this.printLine(message);
                     break;
                 case 4:
                     message = (selectPersonByCode("De qual pessoa você quer calcular a Taxa de Gordura Corporal? Escolha pelo código")) ?
-                            String.format("Nome: %s%nTaxa de Gordura Corporal: %.2f%n", personChosen.getName(), Calculator.calculateBFP(personChosen)) :
+                            String.format("Nome: %s%nTaxa de Gordura Corporal: %.2f%%%n", personChosen.getName(), Calculator.calculateBFP(personChosen)) :
                             NO_PERSON_FOUND_MSG;
                     this.printLine(message);
                     break;
@@ -76,6 +76,7 @@ public class UI {
                     break;
                 case 6:
                     this.printLine("Até mais!");
+                    closeFile();
                     break;
                 default:
                     this.printLine("Insira um número válido");
@@ -184,10 +185,18 @@ public class UI {
     public void listPeople(boolean codeOnly) {
         for (Map.Entry<String, Person> entry : this.peopleController.getPeople().entrySet()) {
             if (codeOnly) {
-                this.printLine(String.format("%s - %s%n", entry.getKey(), entry.getValue().getName()));
+                this.printLine(String.format("%s - %s", entry.getKey(), entry.getValue().getName()));
             } else {
                 this.printLine(entry.getValue().infoString());
             }
+        }
+    }
+
+    public void closeFile(){
+        try {
+            peopleController.closeRepo();
+        }catch (Exception e){
+            this.printLine("Ocorreu um erro ao fechar o arquivo de repositório");
         }
     }
 

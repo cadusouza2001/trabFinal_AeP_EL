@@ -4,17 +4,26 @@ import java.io.*;
 
 public class FileRepository {
 
-    File repo;
+    File file;
     FileWriter repoWriter;
     BufferedReader repoReader;
 
     public FileRepository() throws IOException {
-        this.repo = new File("./repository.txt");
-        if (!this.repo.exists()) {
-            this.repo.createNewFile();
+        this.file = new File("./repository.txt");
+        if (!this.file.exists()) {
+            this.file.createNewFile();
         }
-        this.repoWriter = new FileWriter(repo, true);
-        this.repoReader = new BufferedReader(new FileReader(repo));
+        this.repoWriter = new FileWriter(file, true);
+        this.repoReader = new BufferedReader(new FileReader(file));
+    }
+
+    public FileRepository(String pathname) throws IOException {
+        this.file = new File(pathname);
+        if (!this.file.exists()) {
+            this.file.createNewFile();
+        }
+        this.repoWriter = new FileWriter(file, true);
+        this.repoReader = new BufferedReader(new FileReader(file));
     }
 
     public void saveToRepo(String line) throws IOException {
@@ -26,4 +35,15 @@ public class FileRepository {
         return this.repoReader.readLine();
     }
 
+    public File getFile() {
+        return file;
+    }
+
+    public FileWriter getRepoWriter() {
+        return repoWriter;
+    }
+
+    public BufferedReader getRepoReader() {
+        return repoReader;
+    }
 }
